@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contacts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5dc;
+            --surface: #fbfbec;
+            --ink: #191919;
+            --muted: #5b5b4a;
+            --line: #d9d9b8;
+            --field-line: #b9b996;
+            --accent: #1f6b3a;
+            --accent-dark: #17522c;
+            --header-bg: #191919;
+            --header-ink: #ffffff;
+            --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+            --font-body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .site-header {
+            background: var(--header-bg);
+            color: var(--header-ink);
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .site-header .inner {
+            max-width: none;
+            margin: 0;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem 2rem;
+        }
+
+        .site-title {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .site-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .site-nav a {
+            display: block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.4rem;
+            color: var(--header-ink);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.15s ease;
+        }
+
+        .site-nav a:hover { background: rgba(255, 255, 255, 0.14); }
+        .site-nav a[aria-current="page"] { background: var(--accent); }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #8fd6a6;
+            outline-offset: 2px;
+        }
+
+        /* Content */
+        main {
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .divider {
+            margin: 2.5rem 0;
+            border: 0;
+            border-top: 2px solid var(--accent);
+        }
+
+        h2, h3 {
+            margin: 0 0 1.25rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 { font-size: 1.75rem; }
+        h3 { font-size: 1.3rem; }
+
+        /* Contact details */
+        .details {
+            max-width: 40rem;
+            margin: 0;
+            padding: 0.5rem 1.75rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--accent);
+            border-radius: 0.5rem;
+        }
+
+        .details div {
+            display: grid;
+            grid-template-columns: 8rem 1fr;
+            gap: 0.25rem 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .details div:last-child { border-bottom: 0; }
+
+        .details dt {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .details dd { margin: 0; }
+
+        /* Email link */
+        .email-link {
+            display: inline-block;
+            padding: 0.65rem 1.4rem;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 0.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.15s ease;
+        }
+
+        .email-link:hover { background: var(--accent-dark); }
+
+        /* Form */
+        .contact-form {
+            max-width: 40rem;
+            margin: 0;
+            padding: 1.5rem 1.75rem 1.75rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--accent);
+            border-radius: 0.5rem;
+        }
+
+        .contact-form legend {
+            padding: 0;
+            margin-bottom: 1.25rem;
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .field { margin-bottom: 1.25rem; }
+
+        .field label {
+            display: block;
+            margin-bottom: 0.35rem;
+            font-weight: 500;
+        }
+
+        .field input[type="text"],
+        .field input[type="email"],
+        .field textarea {
+            width: 100%;
+            padding: 0.65rem 0.8rem;
+            border: 1px solid var(--field-line);
+            border-radius: 0.4rem;
+            background: #fff;
+            color: var(--ink);
+            font: inherit;
+        }
+
+        .field textarea {
+            min-height: 10rem;
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            outline: 3px solid #8fd6a6;
+            outline-offset: 0;
+            border-color: var(--accent);
+        }
+
+        .check {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .check input {
+            width: 1.15rem;
+            height: 1.15rem;
+            margin-top: 0.3rem;
+            accent-color: var(--accent);
+        }
+
+        .send {
+            padding: 0.7rem 2rem;
+            border: 0;
+            border-radius: 0.4rem;
+            background: var(--accent);
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .send:hover { background: var(--accent-dark); }
+
+        @media (max-width: 36rem) {
+            .site-title { font-size: 1.5rem; }
+            main { padding-top: 1.5rem; }
+            .details { padding: 0.25rem 1.25rem; }
+            .details div { grid-template-columns: 1fr; }
+            .contact-form { padding: 1.25rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .site-nav a,
+            .email-link,
+            .send { transition: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <h1 class="site-title">Contacts</h1>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Personal Experience.html">Personal Experience</a></li>
+                    <li><a href="Contacts.html" aria-current="page">Contacts</a></li>
+                    <li><a href="Hobbies.html">Hobbies</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h2>My Contact Information</h2>
+
+        <dl class="details">
+            <div>
+                <dt>Name:</dt>
+                <dd>Munini Ngwambu</dd>
+            </div>
+            <div>
+                <dt>Phone:</dt>
+                <dd>+254 790246893</dd>
+            </div>
+            <div>
+                <dt>University:</dt>
+                <dd>Kisii University</dd>
+            </div>
+            <div>
+                <dt>Program:</dt>
+                <dd>Bachelor of Science in Information Technology</dd>
+            </div>
+        </dl>
+
+        <hr class="divider">
+
+        <h3>Send Me an Email</h3>
+        <a class="email-link" href="mailto:muniningwambu9@gmail.com">Email me</a>
+
+        <hr class="divider">
+
+        <form class="contact-form"
+              id="contactForm"
+              action="mailto:muniningwambu9@gmail.com"
+              method="get">
+            <fieldset style="border:0;margin:0;padding:0;min-width:0;">
+                <legend>Contact Form</legend>
+
+                <div class="field">
+                    <label for="name">Enter your Name:</label>
+                    <input type="text" id="name" name="Name">
+                </div>
+
+                <div class="field">
+                    <label for="email">E-mail address*:</label>
+                    <input type="email" id="email" name="Email" required>
+                </div>
+
+                <div class="field">
+                    <label for="subject">Message Subject:</label>
+                    <input type="text" id="subject" name="Subject">
+                </div>
+
+                <div class="field">
+                    <label for="message">Enter your Message*:</label>
+                    <textarea id="message" name="Message" rows="10" required></textarea>
+                </div>
+
+                <div class="check">
+                    <input type="checkbox" id="copy" name="Copy" value="Yes">
+                    <label for="copy">E-mail a copy of this message to your own address.</label>
+                </div>
+
+                <input class="send" type="submit" value="Send">
+            </fieldset>
+        </form>
+
+        <hr class="divider">
+    </main>
+
+    <script>
+        // Opens the visitor's mail app with the form contents filled in.
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var to = "muniningwambu9@gmail.com";
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var subject = document.getElementById("subject").value.trim() || "Message from your website";
+            var message = document.getElementById("message").value.trim();
+            var wantsCopy = document.getElementById("copy").checked;
+
+            var body = "Name: " + name + "\n" +
+                       "Email: " + email + "\n\n" +
+                       message;
+
+            var link = "mailto:" + to +
+                       "?subject=" + encodeURIComponent(subject) +
+                       "&body=" + encodeURIComponent(body);
+
+            if (wantsCopy && email) {
+                link += "&cc=" + encodeURIComponent(email);
+            }
+
+            window.location.href = link;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hobbies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5dc;
+            --surface: #fbfbec;
+            --ink: #191919;
+            --muted: #5b5b4a;
+            --line: #d9d9b8;
+            --accent: #1f6b3a;
+            --header-bg: #191919;
+            --header-ink: #ffffff;
+            --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+            --font-body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .site-header {
+            background: var(--header-bg);
+            color: var(--header-ink);
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .site-header .inner {
+            max-width: 62rem;
+            margin: 0 auto;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem 2rem;
+        }
+
+        .site-title {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .site-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .site-nav a {
+            display: block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.4rem;
+            color: var(--header-ink);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.15s ease;
+        }
+
+        .site-nav a:hover { background: rgba(255, 255, 255, 0.14); }
+
+        .site-nav a[aria-current="page"] {
+            background: var(--accent);
+        }
+
+        a:focus-visible {
+            outline: 3px solid #8fd6a6;
+            outline-offset: 2px;
+        }
+
+        /* Content */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 62rem;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+            gap: 1.5rem;
+            align-content: start;
+        }
+
+        .list-block {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--accent);
+            border-radius: 0.5rem;
+            padding: 1.5rem 1.75rem;
+        }
+
+        .list-block h2 {
+            margin: 0 0 1rem;
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .list-block ol,
+        .list-block ul {
+            margin: 0;
+            padding-left: 1.4rem;
+        }
+
+        .list-block li {
+            padding: 0.35rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .list-block li:last-child { border-bottom: 0; }
+
+        .list-block li::marker {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .site-footer {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        @media (max-width: 36rem) {
+            .site-title { font-size: 1.5rem; }
+            main { padding-top: 1.5rem; }
+            .list-block { padding: 1.25rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .site-nav a { transition: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <h1 class="site-title">Hobbies</h1>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="Contacts.html">Contacts</a></li>
+                    <li><a href="Hobbies.html" aria-current="page">Hobbies</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Personal Experience.html">Personal Experience</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="list-block">
+            <h2>Ordered</h2>
+            <ol>
+                <li>Learning new technology</li>
+                <li>Web development</li>
+            </ol>
+        </section>
+
+        <section class="list-block">
+            <h2>Unordered</h2>
+            <ul>
+                <li>Reading</li>
+                <li>Listening to music</li>
+                <li>Playing games</li>
+                <li>Sports</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        &copy; samson 2026
+    </footer>
+</body>
+</html>
