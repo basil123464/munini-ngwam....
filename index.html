@@ -94,14 +94,42 @@
             padding: 2.5rem 1.5rem 4rem;
         }
 
+        /* Photo and moving name side by side, at the top of the page */
+        .top-row {
+            display: flex;
+            align-items: center;
+        }
+
         /* Photo: in the top-left corner of the page, above the CV bar */
         .profile-photo {
             display: block;
+            flex-shrink: 0;
             width: 180px;
             height: 210px;
             margin: 0;
             object-fit: cover;
             background: var(--surface);
+        }
+
+        /* Name to the right of the photo, moving left to right continuously */
+        .marquee {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-name {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            animation: moveRight 10s linear infinite;
+        }
+
+        @keyframes moveRight {
+            from { transform: translateX(-100%); }
+            to   { transform: translateX(100vw); }
         }
 
         /* Horizontal rule directly below the photo */
@@ -134,18 +162,25 @@
 
         @media (max-width: 36rem) {
             .site-title { font-size: 1.5rem; }
+            .marquee-name { font-size: 32px; }
             main { padding-top: 1.5rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             .site-nav a { transition: none; }
+            .marquee-name { animation: none; }
         }
     </style>
 </head>
 
 <body>
-    <img class="profile-photo" src="profile.jpg" width="180" height="210" alt="Profile picture of Munini Ngwambu">
+    <div class="top-row">
+        <img class="profile-photo" src="profile.jpg" width="180" height="210" alt="Profile picture of Munini Ngwambu">
+        <div class="marquee">
+            <span class="marquee-name">Munini Ngwambu</span>
+        </div>
+    </div>
 
     <hr class="divider">
 
